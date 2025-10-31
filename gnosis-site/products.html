@@ -22,18 +22,18 @@
   </div>
 </header>
 
-<section class="banner" style="background-image:url('images/banner-products.jpg');">
+<section class="banner" style="background-image:url('images/banner-products.jpg'); position: relative;">
   <div class="banner-inner container">
     <h1>Products</h1>
     <p>シンプルで洗練されたフォルムに、植物の息吹を宿す光を。</p>
     <a href="scene.html" class="btn">シーンを見る</a>
-    <div class="scroll-down"></div>
   </div>
+  <!-- 矢印は banner の直下に置く -->
+  <div class="scroll-down"></div>
 </section>
 
 <main>
 
-<!-- 製品セクション -->
 <section class="section products fade-right">
   <div class="container">
     <h2>Our Series</h2>
@@ -85,20 +85,20 @@
 
 <script src="js/carousel.js"></script>
 <script>
-// === Header shrink ===
+// Header shrink
 const header = document.querySelector('.site-header');
 window.addEventListener('scroll', () => {
   header.classList.toggle('shrink', window.scrollY > 50);
 });
 
-// === Parallax effect for banner ===
+// Parallax effect for banner
 window.addEventListener('scroll', () => {
   const banner = document.querySelector('.banner');
   const offset = window.scrollY * 0.4;
   banner.style.backgroundPositionY = `${offset}px`;
 });
 
-// === Scroll animations ===
+// Scroll animations
 const animatedEls = document.querySelectorAll('.fade-up, .fade-left, .fade-right');
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
@@ -106,7 +106,14 @@ const observer = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.2 });
 animatedEls.forEach(el => observer.observe(el));
-</script>
 
+// Productsバナーにスクロール矢印を追加（重複防止）
+if(!document.querySelector('.banner > .scroll-down')) {
+  const scrollIndicator = document.createElement('div');
+  scrollIndicator.className = 'scroll-down';
+  document.querySelector('.banner').appendChild(scrollIndicator);
+}
+</script>
 </body>
 </html>
+

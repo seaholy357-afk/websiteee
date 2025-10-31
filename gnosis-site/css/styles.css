@@ -1,0 +1,468 @@
+/* ===============================
+   Global Reset & Base
+================================*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  color: #222;
+  line-height: 1.8;
+  background-color: #f9f9f9;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+a:hover {
+  opacity: 0.7;
+}
+
+/* ===============================
+   Layout Containers
+================================*/
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* ===============================
+   Header
+================================*/
+.site-header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  transition: all 0.4s ease;
+  box-shadow: 0 0 0 rgba(0,0,0,0);
+}
+
+.site-header.shrink {
+  padding: 5px 0;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.site-header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  letter-spacing: 0.05em;
+}
+
+nav a {
+  margin-left: 20px;
+  font-weight: 500;
+  position: relative;
+}
+
+nav a[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #333;
+}
+
+/* ===============================
+   Banner
+================================*/
+.banner {
+  height: 80vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  text-align: left;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+}
+
+.banner-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+}
+
+.banner h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3rem;
+  margin-bottom: 0.8rem;
+  animation: fadeSlideIn 1s ease forwards;
+}
+
+.banner p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  animation: fadeSlideIn 1.3s ease forwards;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 28px;
+  background: #fff;
+  color: #333;
+  border-radius: 30px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn:hover {
+  background: #333;
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+/* ボタンの光のスライド演出 */
+.btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 100%);
+  transition: all 0.6s ease;
+}
+.btn:hover::before {
+  left: 100%;
+}
+
+/* ===============================
+   Scroll Down Arrow
+================================*/
+.scroll-down {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 28px;
+  height: 28px;
+  border: 2px solid rgba(255,255,255,0.8);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: float 2s ease-in-out infinite, breathe 3s ease-in-out infinite;
+  z-index: 10;
+}
+
+.scroll-down::after {
+  content: "↓";
+  font-size: 14px;
+  color: rgba(255,255,255,0.9);
+  position: relative;
+  top: -1px;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(-50%, 0); }
+  50% { transform: translate(-50%, 8px); }
+}
+
+@keyframes breathe {
+  0%,100% { box-shadow: 0 0 5px rgba(255,255,255,0.4); }
+  50% { box-shadow: 0 0 20px rgba(255,255,255,0.9); }
+}
+
+/* ===============================
+   Section Base
+================================*/
+.section {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s ease;
+  padding: 100px 0;
+}
+
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.2rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  position: relative;
+  display: inline-block;
+}
+
+.section h2::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -12px;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(to right, #bbb, #000, #bbb);
+  opacity: 0.3;
+}
+
+.section-intro {
+  text-align: center;
+  font-size: 1rem;
+  margin-bottom: 60px;
+  color: #555;
+}
+
+/* ===============================
+   Concept Section (中央寄せ)
+================================*/
+.section.concept {
+  text-align: center;
+  padding: 120px 20px;
+  background: linear-gradient(to bottom, #fafafa, #fff);
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.section.concept h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  font-size: 2.5rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 2rem;
+  color: #222;
+}
+
+.section.concept p {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 1.1rem;
+  line-height: 2;
+  color: #444;
+  margin: 0.4em 0;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+.section.concept.visible p {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section.concept.visible p:nth-child(2) { transition-delay: 0.1s; }
+.section.concept.visible p:nth-child(3) { transition-delay: 0.3s; }
+.section.concept.visible p:nth-child(4) { transition-delay: 0.5s; }
+.section.concept.visible p:nth-child(5) { transition-delay: 0.7s; }
+
+/* ===============================
+   Carousel Section
+================================*/
+.carousel-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.product-container {
+  display: flex;
+  gap: 30px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 10px;
+}
+
+.product-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.product-container::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+.product-card {
+  flex: 0 0 300px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+  padding: 20px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+.product-card h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  margin-top: 1rem;
+  margin-bottom: 0.3rem;
+}
+
+.product-card p {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+/* ===============================
+   Carousel Buttons
+================================*/
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.9);
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  z-index: 5;
+}
+
+.carousel-btn:hover {
+  background: #333;
+  color: #fff;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-btn.prev {
+  left: 10px;
+}
+
+.carousel-btn.next {
+  right: 10px;
+}
+
+/* ===============================
+   Scroll Indicator
+================================*/
+.scroll-indicator {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  gap: 10px;
+}
+
+.scroll-indicator span {
+  width: 12px;
+  height: 12px;
+  background: #ccc;
+  border-radius: 50%;
+  animation: pulse 2s infinite ease-in-out;
+}
+
+.scroll-indicator span:nth-child(2) {
+  animation-delay: 0.5s;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); background: #ccc; }
+  50% { transform: scale(1.4); background: #333; }
+}
+
+/* ===============================
+   Motion Animations
+================================*/
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===============================
+   Footer
+================================*/
+.site-footer {
+  background: #222;
+  color: #eee;
+  text-align: center;
+  padding: 40px 0;
+  font-size: 0.9rem;
+  letter-spacing: 0.03em;
+}
+
+/* ===============================
+   Responsive
+================================*/
+@media (max-width: 768px) {
+  .banner h1 { font-size: 2.2rem; }
+  .product-card { flex: 0 0 250px; }
+  .carousel-btn {
+    width: 40px; height: 40px; font-size: 1.5rem;
+  }
+  .scroll-down { bottom: 20px; }
+  .section.concept h2 { font-size: 2rem; }
+  .section.concept p { font-size: 1rem; }
+}
+
+.banner {
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+}
+
+nav a {
+  position: relative;
+}
+nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 2px;
+  background: #fff;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+  transform-origin: right;
+}
+nav a:hover::after, nav a[aria-current="page"]::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gnosis — Botanical Light</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="brand">Gnosis</div>
+    <nav>
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="products.html">Products</a>
+      <a href="scene.html">Scene</a>
+    </nav>
+  </div>
+</header>
+
+<section class="banner" style="background-image:url('images/banner-home.jpg');position: relative;">
+  <div class="banner-inner container">
+    <h1>Gnosis</h1>
+    <p>植物と光が響き合う、知性ある空間へ。</p>
+    <a href="products.html" class="btn">製品を見る</a>
+  </div>
+</section>
+
+<main>
+<!-- Concept -->
+<section class="section concept fade-up">
+  <div class="container">
+    <h2>Concept</h2>
+    <p>光と植物が織りなす調和。</p>
+<p>柔らかな光が葉の輪郭を際立たせ、</p><p>空間に静けさと深呼吸するような安らぎをもたらします。</p>
+<p>自然の息づかいと洗練されたデザインが融合することで、</p><p>心地よさと知性が共存する新しいライフシーンを提案します。</p>
+  </div>
+</section>
+
+<!-- Products Carousel -->
+<section class="section products fade-up">
+  <div class="container">
+    <h2>Products</h2>
+    <div class="carousel-wrapper">
+      <button class="carousel-btn prev">&#8249;</button>
+      <div class="product-container">
+        <div class="product-card"><img src="images/light1.jpg"><h3>Main Product</h3><p>シンプルで洗練された光と植物の融合。</p></div>
+        <div class="product-card"><img src="images/light2.jpg"><h3>Second Product</h3><p>デザインと機能の両立を追求したライト。</p></div>
+        <div class="product-card"><img src="images/light3.jpg"><h3>Third Product</h3><p>空間に溶け込みながら、存在感を放つライト。</p></div>
+        <div class="product-card"><img src="images/light4.jpg"><h3>Fourth Product</h3><p>美しさと実用性を兼ね備えた照明デザイン。</p></div>
+        <div class="product-card"><img src="images/light5.jpg"><h3>Fifth Product</h3><p>暮らしを照らし、心を満たす光のかたち。</p></div>
+      </div>
+      <button class="carousel-btn next">&#8250;</button>
+    </div>
+    <div class="scroll-indicator"><span></span><span></span><span></span></div>
+  </div>
+</section>
+
+<!-- Scene Carousel -->
+<section class="section scene fade-up">
+  <div class="container">
+    <h2>Scene</h2>
+    <div class="carousel-wrapper">
+      <button class="carousel-btn prev">&#8249;</button>
+      <div class="product-container">
+        <div class="product-card">
+          <img src="images/living.jpg" alt="Living Scene">
+          <h3>Living Space</h3>
+          <p>光と緑が調和する空間を演出。</p>
+        </div>
+        <div class="product-card">
+          <img src="images/workspace.jpg" alt="Workspace Scene">
+          <h3>Workspace</h3>
+          <p>集中力を高める柔らかな照明環境。</p>
+        </div>
+        <div class="product-card">
+          <img src="images/cafe.jpg" alt="Cafe Scene">
+          <h3>Cafe Scene</h3>
+          <p>落ち着きと知性を感じられる環境。</p>
+        </div>
+        <div class="product-card">
+          <img src="images/balcony.jpg" alt="Cafe Scene">
+          <h3>Balcony Scene</h3>
+          <p>風と光が心地よく交わる、穏やかなひとときを。</p>
+        </div>
+        <div class="product-card">
+          <img src="images/gallery.jpg" alt="Cafe Scene">
+          <h3>Gallery Scene</h3>
+          <p>作品と調和し、空間に静かな存在感を添える光。</p>
+        </div>
+
+      </div>
+      <button class="carousel-btn next">&#8250;</button>
+    </div>
+    <div class="scroll-indicator"><span></span><span></span></div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer fade-up">
+  <div class="container">
+    <p>© 2025 Gnosis — Botanical Light</p>
+  </div>
+</footer>
+
+<script src="js/carousel.js"></script>
+<script>
+// === Cursor Trail ===
+const trail = document.createElement('div');
+trail.className = 'cursor-trail';
+document.body.appendChild(trail);
+
+window.addEventListener('mousemove', e => {
+  trail.style.transform = `translate(${e.clientX - 6}px, ${e.clientY - 6}px)`;
+  trail.classList.remove('fade');
+});
+window.addEventListener('mouseout', () => trail.classList.add('fade'));
+
+// === Enhanced Scroll Animations ===
+const animatedSections = document.querySelectorAll('.fade-up, .fade-left, .fade-right');
+const animObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.2 });
+animatedSections.forEach(el => animObserver.observe(el));
+
+// === Scroll Indicator ===
+const scrollIndicator = document.createElement('div');
+scrollIndicator.className = 'scroll-down';
+document.querySelector('.banner').appendChild(scrollIndicator);
+</script>
+
+<script>
+  // Header shrink
+  const header = document.querySelector('.site-header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('shrink', window.scrollY > 50);
+  });
+
+  // Intersection Observer animations
+  const sections = document.querySelectorAll('.fade-up');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.2 });
+  sections.forEach(section => observer.observe(section));
+</script>
+
+</body>
+</html>
